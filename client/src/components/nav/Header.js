@@ -62,8 +62,19 @@ const Header=()=> {
           </Menu.Item>
           {isLoggedIn && (
             <SubMenu key="username" icon={<UserOutlined />} className="float-right" title={userName}>
-            <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={logout}>Log Out</Menu.Item>
-            {/* <Menu.Item key="setting:2">Option 2</Menu.Item> */}
+          {
+            user && user.role==="subscriber" && 
+             (<Menu.Item key="dashboard">
+              <Link to="/user/history">Dashboard</Link>
+              </Menu.Item>)
+          }
+          {
+            user && user.role==="admin" && 
+             (<Menu.Item key="dashboard">
+              <Link to="/admin/dashboard">Dashboard</Link>
+              </Menu.Item>)
+          }
+          <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={logout}>Log Out</Menu.Item>
             </SubMenu>
           )}
         </Menu>

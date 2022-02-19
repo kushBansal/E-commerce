@@ -5,7 +5,10 @@ import { updatePassword } from "firebase/auth";
 import { toast } from "react-toastify";
 import { Form, Input, Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import { useSelector } from "react-redux";
+import AdminNav from "../../components/nav/Adminnav";
 const  Password= ()=> {
+  const {user}=useSelector(state=>state);
     const [loading,setLoading]=useState(false);
     const ResetPasswordForm=()=>{
         const [password,setPassword]=useState();
@@ -70,7 +73,8 @@ const  Password= ()=> {
     return(
     <div className="container-fluid">
       <div className="row">
-      <UserNav/>
+      {user.role==="subscriber" && <UserNav/>}
+      {user.role==="admin" && <AdminNav/>}
           <div className="col">
           <div className="col-md-6 offset-md-3">
                 {!loading ? <h4 className="offset-md-6">Update Password</h4> : <h4 className="offset-md-6 text-danger">Loading...</h4>}
