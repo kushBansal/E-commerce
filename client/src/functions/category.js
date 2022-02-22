@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const categoriesList=async(token)=>{
+export const categoriesList=async()=>{
     return await axios.get(`${process.env.REACT_APP_API}/categories/`)
 }
 
