@@ -1,4 +1,5 @@
 const Category=require("../models/category");
+const Sub=require("../models/sub");
 var slugify = require('slugify')
 
 exports.create=async(req,res)=>{
@@ -20,7 +21,8 @@ exports.remove=async(req,res)=>{
     const {slug}=req.params;
     try{
         const dltedCategory=await Category.findOneAndDelete({slug});
-        res.json(dltedCategory);
+        const dltedSubCategory=await Sub.deleteMany({parent:dltedCategory});
+        res.json({...dltedCategory,...dltedSubCategory});
     }
     catch(err)
     {
@@ -40,7 +42,7 @@ exports.update=async(req,res)=>{
     }
     catch(err)
     {
-        console.log("deleted query on category failed",err);
+        console.log("update query on category failed",err);
         res.status(400).send("category deletion failed");
     }
 }

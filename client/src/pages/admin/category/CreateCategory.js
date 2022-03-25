@@ -77,8 +77,9 @@ const  CreateCategory= ()=> {
     const deleteCategory=(slug)=>{
         deleteCategories(user.token,slug)
         .then(res=>{
+          // console.log(res);
           loadCategories(setCategories,setSearchCategories);
-            toast.success(`${res.data.name} deleted successfully`);
+            toast.success(`${res.data._doc.name} category and ${res.data.deletedCount} sub-category deleted successfully`);
         })
         .catch(err=>{
             console.log("category deletion error",err);
@@ -102,8 +103,10 @@ const  CreateCategory= ()=> {
       <div className="row">
       <AdminNav />
         <div className="col text-center">
-            {loading?<h3 className="text-danger">Loading...</h3>:<h3>Create Category</h3>}
+            {loading?<h3 className="text-danger">Loading...</h3>:<h3 style={{color:"#1890ff"}}>Create Category</h3>}
             <CategoryForm setLoading={setLoading} setCategories={setCategories} setSearchCategories={setSearchCategories}/>
+            <br />
+            <h4 style={{color:"#1890ff"}}>Categories</h4>
             <label className="me-3">Search:</label>
             <Input.Search style={{ width: 300 }} enterButton onSearch={onSearch} placeholder="Search categories" onChange={(e)=>onSearch(e.target.value)} />
             {searchCategories.map((val,idx)=>
