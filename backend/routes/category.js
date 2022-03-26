@@ -6,7 +6,7 @@ const {create,remove,list,read,update}=require("../controllers/category")
 
 // import middlewares
 const {authCheck,adminCheck}=require("../middlewares/auth");
-const { route } = require("./auth");
+// const { route } = require("./auth");
 
 // routes
 router.get("/categories",list);
